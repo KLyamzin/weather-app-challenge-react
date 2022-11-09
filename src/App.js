@@ -5,6 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { BrowserRouter, Router, Routes } from 'react-router-dom';
 import LocationApiCall from './utils/LocationApiCall';
 import ResolveSearchInput from './utils/ResolveSearchInput';
+import WeatherApiCall from './utils/WeatherApiCall';
 
 function App() {
   const [location, setLocation] = useState('');
@@ -17,7 +18,8 @@ function App() {
     const getLatAndLonParameters = async () => {
       try {
         let data = await LocationApiCall(searchParameter);
-        console.log(data);
+        let weatherData = await WeatherApiCall(data);
+        console.log(weatherData);
       } catch (error) {
         console.log(error);
       }

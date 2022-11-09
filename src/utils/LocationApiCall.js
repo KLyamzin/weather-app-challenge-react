@@ -6,7 +6,8 @@ const LocationApiCall = (searchParameter) => {
     .then((data) => {
       const lat = data.results[0].latitude;
       const lon = data.results[0].longitude;
-      return new Object({ lat, lon });
+      const name = data.results[0].name;
+      return new Object({ lat, lon, name });
     });
 };
 
