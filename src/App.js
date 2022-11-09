@@ -1,10 +1,30 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 import { Navbar, Container, Form, Button } from 'react-bootstrap';
-
 import { LinkContainer } from 'react-router-bootstrap';
 import { BrowserRouter, Router, Routes } from 'react-router-dom';
+import LocationApiCall from './utils/LocationApiCall';
+import ResolveSearchInput from './utils/ResolveSearchInput';
 
 function App() {
+  const [location, setLocation] = useState('');
+  const getWeather = (e) => {
+    e.preventDefault();
+    // get the location parameter for initial API call to get lat. & lon.
+    const searchParameter = ResolveSearchInput(location); // returns something like: name=11234
+
+    //get the lat & long parameters
+    const getLatAndLonParameters = async () => {
+      try {
+        let data = await LocationApiCall(searchParameter);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getLatAndLonParameters();
+  };
+
   return (
     <BrowserRouter>
       <div className="d-flex flex-column app-container">
@@ -16,14 +36,18 @@ function App() {
               </LinkContainer>
               <Navbar.Toggle aria-controls="navbarSearch" />
               <Navbar.Collapse id="navbarSearch" className="my-2">
-                <Form className="d-flex ms-auto">
+                <Form className="d-flex ms-auto" onSubmit={getWeather}>
                   <Form.Control
                     type="search"
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
                   />
-                  <Button variant="outline-success">Search</Button>
+                  <Button variant="outline-success" type="submit">
+                    Search
+                  </Button>
                 </Form>
               </Navbar.Collapse>
             </Container>
