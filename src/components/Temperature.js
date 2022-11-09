@@ -16,7 +16,7 @@ const Temperature = ({
         {WeatherCodes(weathercode)}
       </Card.Text>
       <Card.Text className="ms-auto me-4 large-font">{`${temperature}${temperature_2m}`}</Card.Text>
-      <Card.Text className="mb-0 ms-4 me-auto mt-auto">{`Wind speed is ${windspeed}Mph`}</Card.Text>
+      <Card.Text className="mb-0 ms-0 mt-auto">{`Wind speed is ${windspeed}Mph`}</Card.Text>
     </>
   );
 };
