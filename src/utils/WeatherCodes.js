@@ -1,4 +1,5 @@
 const WeatherCodes = (code) => {
+  // console.log(code);
   const codeDescription = {
     'Clear sky': [0],
     'Mainly clear, partly cloudy, and overcast': [1, 2, 3],
