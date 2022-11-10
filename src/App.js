@@ -10,6 +10,7 @@ import {
   Card,
   Row,
   Alert,
+  Nav,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { BrowserRouter, Router, Routes } from 'react-router-dom';
@@ -52,9 +53,7 @@ function App() {
     // get the location parameter for initial API call to get lat. & lon.
     try {
       const searchParameter = ResolveSearchInput(location); // returns something like: name=11234
-
       let data = await LocationApiCall(searchParameter);
-
       setResultList(data.results);
     } catch (error) {
       console.log(error);
@@ -65,7 +64,6 @@ function App() {
   const handleResultClick = async (lat, lon, city, state, country) => {
     try {
       let data = await WeatherApiCall(lat, lon);
-
       setWeather(data);
       setLocationPlace((prev) => [city, state, country, ...prev]);
       setLocation(''); // to remove clear search input
@@ -134,9 +132,24 @@ function App() {
           </Container>
         </main>
         <footer className="text-center">
-          <a href="https://github.com/KLyamzin/weather-app-challenge-react">
-            GitHub Repo.
-          </a>
+          <Nav className="justify-content-center" activeKey="/home">
+            <Nav.Item>
+              <Nav.Link
+                href="https://github.com/KLyamzin/weather-app-challenge-react"
+                target="_blank"
+              >
+                GitHub
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                href="http://www.linkedin.com/in/kirill-lyamzin"
+                target="_blank"
+              >
+                LinkedIn
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
         </footer>
       </div>
     </BrowserRouter>
