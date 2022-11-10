@@ -22,6 +22,8 @@ const ResolveSearchInput = (location) => {
       locationForApi = `name=${temp}`;
     } else if (regexCity.test(temp)) {
       locationForApi = `name=${temp}`;
+    } else {
+      throw Error('Not a valid location input. Try again');
     }
   }
 

@@ -50,9 +50,11 @@ function App() {
   //get the lat & long parameters and get weather data object
   const getLatAndLonParameters = async () => {
     // get the location parameter for initial API call to get lat. & lon.
-    const searchParameter = ResolveSearchInput(location); // returns something like: name=11234
     try {
+      const searchParameter = ResolveSearchInput(location); // returns something like: name=11234
+
       let data = await LocationApiCall(searchParameter);
+
       setResultList(data.results);
     } catch (error) {
       console.log(error);
