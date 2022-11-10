@@ -14,11 +14,13 @@ const ResultsList = ({ resultList, handleResultClick }) => {
               result.latitude,
               result.longitude,
               result.name,
-              result.admin1,
+              result.admin1 !== undefined ? result.admin1 : result.admin2,
               result.country
             )
           }
-        >{`${result.name}, ${result.admin1}, ${result.country}`}</ListGroup.Item>
+        >{`${result.name}, ${
+          result.admin1 !== undefined ? result.admin1 : result.admin2
+        }, ${result.country}`}</ListGroup.Item>
       ))}
     </ListGroup>
   );
