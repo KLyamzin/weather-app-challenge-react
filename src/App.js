@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect } from 'react';
+import './App.css';
 import { useState } from 'react';
 import {
   Navbar,
@@ -86,9 +86,7 @@ function App() {
         <header>
           <Navbar bg="dark" variant="dark" expand="md">
             <Container fluid>
-              <LinkContainer to="/">
-                <Navbar.Brand>Weather App</Navbar.Brand>
-              </LinkContainer>
+              <Navbar.Brand>Weather App</Navbar.Brand>
               <Navbar.Toggle aria-controls="navbarSearch" />
               <Navbar.Collapse id="navbarSearch" className="my-2">
                 <Form className="d-flex ms-auto" onSubmit={getWeather}>
@@ -108,8 +106,8 @@ function App() {
             </Container>
           </Navbar>
         </header>
-        <main>
-          <Container fluid className="px-1 px-md-4 py-5 mx-auto">
+        <main className="gradientCustom">
+          <Container fluid className="px-1 px-md-4 py-5 mx-auto ">
             {resultList.length > 0 ? (
               <ResultsList
                 resultList={resultList}
@@ -119,7 +117,9 @@ function App() {
               ''
             )}
             {locationPlace.length <= 0 ? (
-              <Alert variant={'dark'}>Please search by City or Zip Code</Alert>
+              <Alert variant={'light'} className="my-3 text-center">
+                Please search by City or Zip Code
+              </Alert>
             ) : (
               <Row className="row d-flex justify-content-center px-3">
                 <Card>
@@ -132,29 +132,35 @@ function App() {
             )}
           </Container>
         </main>
-        <footer className="text-center">
-          <Nav className="justify-content-center" activeKey="/home">
-            <Nav.Item>
-              <Nav.Link
-                className="align-middle"
-                href="https://github.com/KLyamzin/weather-app-challenge-react"
-                target="_blank"
-              >
-                <Github className="me-1 mb-1"></Github>
-                GitHub
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                className=" align-middle"
-                href="http://www.linkedin.com/in/kirill-lyamzin"
-                target="_blank"
-              >
-                <Linkedin className="me-1 mb-1"></Linkedin>
-                LinkedIn
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
+        <footer>
+          <Navbar
+            bg="dark"
+            variant="dark"
+            className="d-flex justify-content-center"
+          >
+            <Nav activeKey="/home">
+              <Nav.Item>
+                <Nav.Link
+                  className="align-middle"
+                  href="https://github.com/KLyamzin/weather-app-challenge-react"
+                  target="_blank"
+                >
+                  <Github className="me-1 mb-1"></Github>
+                  GitHub
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  className=" align-middle"
+                  href="http://www.linkedin.com/in/kirill-lyamzin"
+                  target="_blank"
+                >
+                  <Linkedin className="me-1 mb-1"></Linkedin>
+                  LinkedIn
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Navbar>
         </footer>
       </div>
     </BrowserRouter>

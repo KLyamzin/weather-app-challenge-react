@@ -4,7 +4,7 @@ import { ListGroup } from 'react-bootstrap';
 // list available search results
 const ResultsList = ({ resultList, handleResultClick }) => {
   return (
-    <ListGroup variant="flush">
+    <ListGroup>
       {resultList.map((result) => (
         <ListGroup.Item
           key={result.id}
