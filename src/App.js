@@ -13,6 +13,7 @@ import {
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { BrowserRouter, Router, Routes } from 'react-router-dom';
+import ResultsList from './components/ResultsList';
 import Temperature from './components/Temperature';
 import LocationApiCall from './utils/LocationApiCall';
 import ResolveSearchInput from './utils/ResolveSearchInput';
@@ -43,7 +44,8 @@ function App() {
       weathercode: 'wmo code',
     },
   });
-  const [locationName, setLocationName] = useState('');
+  const [locationPlace, setLocationPlace] = useState([]);
+  const [resultList, setResultList] = useState([]);
 
   //get the lat & long parameters and get weather data object
   const getLatAndLonParameters = async () => {
@@ -51,12 +53,26 @@ function App() {
     const searchParameter = ResolveSearchInput(location); // returns something like: name=11234
     try {
       let data = await LocationApiCall(searchParameter);
-      await WeatherApiCall(data).then((object) => setWeather(object));
-      setLocationName(data.name);
+      setResultList(data.results);
     } catch (error) {
       console.log(error);
     }
   };
+
+  // Query selected city
+  const handleResultClick = async (lat, lon, city, state, country) => {
+    try {
+      let data = await WeatherApiCall(lat, lon);
+
+      setWeather(data);
+      setLocationPlace((prev) => [city, state, country, ...prev]);
+      setLocation(''); // to remove clear search input
+      setResultList([]); // to remove the list of results
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // call API to get weather
   const getWeather = (e) => {
     e.preventDefault();
@@ -93,13 +109,21 @@ function App() {
         </header>
         <main>
           <Container fluid className="px-1 px-md-4 py-5 mx-auto">
-            {!locationName ? (
+            {resultList.length > 0 ? (
+              <ResultsList
+                resultList={resultList}
+                handleResultClick={handleResultClick}
+              />
+            ) : (
+              ''
+            )}
+            {locationPlace.length <= 0 ? (
               <Alert variant={'dark'}>Please search by City or Zip Code</Alert>
             ) : (
               <Row className="row d-flex justify-content-center px-3">
                 <Card>
                   <Card.Body className="ms-auto me-4 mt-3 mb-0">
-                    <Card.Title>{locationName}</Card.Title>
+                    <Card.Title>{`${locationPlace[0]}, ${locationPlace[1]}, ${locationPlace[2]}`}</Card.Title>
                     <Temperature weather={weather} />
                   </Card.Body>
                 </Card>
