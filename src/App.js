@@ -19,6 +19,7 @@ import Temperature from './components/Temperature';
 import LocationApiCall from './utils/LocationApiCall';
 import ResolveSearchInput from './utils/ResolveSearchInput';
 import WeatherApiCall from './utils/WeatherApiCall';
+import { Github, Linkedin } from 'react-bootstrap-icons';
 
 function App() {
   // current input data
@@ -135,17 +136,21 @@ function App() {
           <Nav className="justify-content-center" activeKey="/home">
             <Nav.Item>
               <Nav.Link
+                className="align-middle"
                 href="https://github.com/KLyamzin/weather-app-challenge-react"
                 target="_blank"
               >
+                <Github className="me-1 mb-1"></Github>
                 GitHub
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
+                className=" align-middle"
                 href="http://www.linkedin.com/in/kirill-lyamzin"
                 target="_blank"
               >
+                <Linkedin className="me-1 mb-1"></Linkedin>
                 LinkedIn
               </Nav.Link>
             </Nav.Item>
